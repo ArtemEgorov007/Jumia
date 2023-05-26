@@ -1,0 +1,14 @@
+[
+	{
+		"id": 1,
+		"title": "XIAOMI Poco M4 Pro, 6.42 AMOLED Screen, 6GB/128GB Memory, 64MP Triple Camera",
+		"image": "/assets/images/Xiaomi.png",
+		"percent": "-8%"
+	},
+	{
+		"id": 2,
+		"title": "Echo Dot (4th Gen) - Smart Speaker With Alexa - Twilight Blue",
+		"image": "/assets/images/Dot.png",
+		"percent": "-27%"
+	}
+]
