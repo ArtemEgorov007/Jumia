@@ -15,19 +15,23 @@
 			</div>
 			<section class="card-location__content">
 				<div class="card-location__logotip">
-					<img src="~/assets/svg/logotip.svg" alt="Logotip" />
-				</div>
-				<div class="card-location__product">
-					<div v-for="card in cards" :key="card.id">
-						<div>
-							<p>{{ card.title }}</p>
-						</div>
-						<img :src="card.image" :alt="card.title" />
-						<a href="">Add to cart</a>
-					</div>
+					<img class="card-location__brend" src="~/assets/svg/logotip.svg" alt="Logotip" />
 				</div>
 				<div class="card-location__button">
 					<a class="card-location__link" href="#">Buy now</a>
+				</div>
+				<div class="swiper-container">
+					<div class="swiper-wrapper">
+						<div v-for="card in cards" :key="card.id" class="swiper-slide card-location__product">
+							<div class="card-locatino__presentation">
+								<img class="card-locatino__imaging" :src="card.image" :alt="card.title" />
+								<div class="card-locatino__information">
+									<p class="card-locatino__names">{{ card.title }}</p>
+								</div>
+								<a class="card-location__bay" href="">Добавить в корзину</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</section>
 		</article>
@@ -35,7 +39,21 @@
 </template>
 
 <script setup>
-const { data: cards } = await useFetch("/data.json");
+import Swiper from "swiper";
+import "swiper/swiper-bundle.css";
+
+const { data: cards } = await useFetch(`https://fakestoreapi.com/products`);
+
+onMounted(() => {
+	new Swiper(".swiper-container", {
+		slidesPerView: 1,
+		spaceBetween: 150,
+		navigation: {
+			nextEl: ".swiper-button-next",
+			prevEl: ".swiper-button-prev"
+		}
+	});
+});
 </script>
 
 <style lang="sass" scoped>
@@ -53,12 +71,16 @@ const { data: cards } = await useFetch("/data.json");
   margin: 0 auto
   background-color: #000
 
+.swiper-container 
+  width: 286px
+  margin: 0 auto
 
 .card-location__text
   position: relative
   background-color: #D35A35
-  margin: 24px 0 24px 16px
-  left: 5px
+  width: 384px
+  height: 70px
+  left: 3%
 
 .card-location__subtitle
   display: flex
@@ -69,16 +91,16 @@ const { data: cards } = await useFetch("/data.json");
   font-family: 'Archivo Black', sans-serif
   font-size: 40px
   color: #fff
-  padding: 13px 16px 16px 13px
+  padding: 13px 0px 0 8px
+
+.card-location__size
+  position: relative
+  top: 9%
 
 .card-location__picture
   position: relative
-  margin-top: 20px
-
-.card-location__content
-  display: flex
-  flex-direction: column
-  height: 80%
+  width: 112px
+  height: 128px
 
 .card-location__contact
   position: relative
@@ -101,20 +123,29 @@ const { data: cards } = await useFetch("/data.json");
   padding: 0 0 20px 0
 
 .card-location__logotip
-  height: 118px
   width: 481px
+  height: 118px
   background-color: #fff
-  border-radius: 10px
   display: flex
+  align-items: center
   justify-content: center
+  border-radius: 24px
   margin: 14px 12px 20px 12px
   cursor: pointer
+
+.card-location__brend
+  width: 283px
+  height: 52px
 
 .card-location__product
   background-color: #fff
   width: 279px
   height: 418px
   margin: 0 auto 8px
+
+.card-locatino__imaging
+  width: 250px
+  height: 25
 
 .card-location__link
   width: 481px
@@ -127,7 +158,8 @@ const { data: cards } = await useFetch("/data.json");
    background-color: #FF6347
    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3)
 
-
+.card-location__button
+  margin-top: 7px
 
 .card-location__link
   font-family: 'SF Pro Display'
@@ -137,4 +169,11 @@ const { data: cards } = await useFetch("/data.json");
   font-weight: 700
   text-align: center
   padding: 21px 0 21px 0
+
+.card-location__contant
+ display: flex
+
+.card-locatino__presentation
+  padding: 6px 12px 6px 12px
+
 </style>
